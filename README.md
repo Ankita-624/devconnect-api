@@ -96,8 +96,8 @@ docker run -p 5000:5000 devconnect-api
 
 ---
 
-## 📸 Screenshots
-_Add screenshots from Swagger UI and Postman tests here._
+## 📸 Screenshot
+![Swagger UI](./DevScreenshots/swagger-ui.png)
 
 ---
 
