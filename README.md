@@ -96,6 +96,25 @@ Save this as .env in your root directory
 ```
 ---
 
+## For Testing 
+**add setup** :
+```
+npm install jest supertest mongodb-memory-server @types/jest ts-jest --save-dev
+```
+
+**Add Test Scripts to package.json:**
+```
+"scripts": {
+  "test": "jest --coverage",
+  "test:watch": "jest --watch"
+}
+```
+
+**After implementing tests, run:**
+```
+npm test
+```
+---
 ## 🔧  Run Locally
 
  **Install dependencies**
