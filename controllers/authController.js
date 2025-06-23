@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // @route   POST /api/auth/register
-exports.register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
 };
 
 // @route   POST /api/auth/login
-exports.login = async (req, res) => {
+/*exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -55,9 +55,28 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+*/
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ message: 'Email and password are required' });
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '3d' });
+    res.status(200).json({ token, user: { id: user._id, username: user.username, email: user.email } });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 // @route   POST /api/auth/refresh-token
-exports.refreshToken = async (req, res) => {
+const refreshToken = async (req, res) => {
   const refreshToken = req.body.token;
   if (!refreshToken) return res.status(401).json({ message: 'Refresh token required' });
 
@@ -74,7 +93,7 @@ exports.refreshToken = async (req, res) => {
   }
 };
 
-exports.logout = async (req, res) => {
+const logout = async (req, res) => {
   const refreshToken = req.body.token;
   if (!refreshToken) return res.status(400).json({ message: 'Token required' });
 
@@ -85,3 +104,20 @@ exports.logout = async (req, res) => {
     res.status(500).json({ message: 'Logout failed' });
   }
 };
+// @route   GET /api/auth/current-user
+const getCurrentUser = async (req, res) => {
+  try {
+    const tokenId = req.tokenId;
+    const tokenDoc = await Token.findOne({ _id: tokenId });
+
+    if (!tokenDoc) return res.status(401).json({ message: 'Token expired' });
+
+    const user = await User.findById(tokenDoc.userId).select('-password');
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch current user' });
+  }
+};
+
+module.exports = { register, login, refreshToken, logout, getCurrentUser };
+

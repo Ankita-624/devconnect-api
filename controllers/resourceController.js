@@ -71,7 +71,7 @@ exports.updateResource = async (req, res) => {
   }
 };
 
-exports.deleteResource = async (req, res) => {
+/*exports.deleteResource = async (req, res) => {
   try {
     const resource = await Resource.findById(req.params.id);
     if (!resource) return res.status(404).json({ message: 'Not found' });
@@ -81,6 +81,22 @@ exports.deleteResource = async (req, res) => {
     await resource.remove();
     res.status(200).json({ message: 'Deleted successfully' });
   } catch (err) {
+    res.status(500).json({ message: 'Delete failed' });
+  }
+};
+*/
+exports.deleteResource = async (req, res) => {
+  try {
+    const resource = await Resource.findById(req.params.id);
+    if (!resource) return res.status(404).json({ message: 'Not found' });
+
+    if (resource.postedBy.toString() !== req.user.id)
+      return res.status(403).json({ message: 'Unauthorized' });
+
+    await Resource.findByIdAndDelete(req.params.id); // ✅ Replace remove()
+    res.status(200).json({ message: 'Deleted successfully' });
+  } catch (err) {
+    console.error(' Error deleting resource:', err.message);
     res.status(500).json({ message: 'Delete failed' });
   }
 };
