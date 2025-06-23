@@ -48,12 +48,12 @@ This project includes all mandatory testing layers:
 
 ---
 
-📸 **Test Coverage Summary:**  
+## 📸 Test Coverage Summary: 
 ![Swagger UI](./DevScreenshots/cover1.png)
-
+![Swagger UX](./DevScreenshots/cover2.png)
 
 ---
-🏗️  **Folder Structure**
+## 🏗️ Folder Structure
  ```
 ├── config/              # DB Configuration
 ├── controllers/         # Logic for auth, resource, comments
@@ -69,7 +69,7 @@ This project includes all mandatory testing layers:
 ```
 ---
 
-⚙️  **Technologies Used :**
+## ⚙️  Technologies Used :
 - Node.js, Express.js
 
 - MongoDB + Mongoose
@@ -86,7 +86,7 @@ This project includes all mandatory testing layers:
 
 ---
 
-🔐  **Environment Variables:**
+## 🔐  Environment Variables:
 ```
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
@@ -96,25 +96,25 @@ Save this as .env in your root directory
 ```
 ---
 
-🔧  **Run Locally**
+## 🔧  Run Locally
 
-# Install dependencies
+ **Install dependencies**
 npm install
 
-# Start dev server
+**Start dev server**
 npm run dev
 
-# Visit Swagger docs
+**Visit Swagger docs**
 http://localhost:5000/api-docs
 
 ---
 
-🐳 **Run via Docker:**
+## 🐳 Run via Docker:
 
-# Build the image
+ **Build the image**
 docker build -t devconnect-api .
 
-# Run the container
+**Run the container**
 docker run -p 5000:5000 devconnect-api
 
 ---
@@ -128,14 +128,14 @@ docker run -p 5000:5000 devconnect-api
 
 ---
 
-🙌 **Acknowledgments**
+## 🙌 Acknowledgments
 ```
 Huge thanks to the Keploy API Fellowship team for creating an opportunity to dive into modern testing.
 Gratitude to Achanandhi M, Amaan Bhati, and the amazing open-source mentors.
 ```
 ---
 
-🧠 **What I Learned:**
+## 🧠 What I Learned:
 ```
 🧪 Writing unit tests using Jest with mocks and real DB
 
@@ -148,7 +148,7 @@ Gratitude to Achanandhi M, Amaan Bhati, and the amazing open-source mentors.
 ✅ Reaching 70%+ code coverage while maintaining real-world structure
 ```
 ---
-📣 **Social Post** 
+## 📣 Social Post 
 ```
 Just wrapped up Assignment 3 for the #Keploy API Fellowship!
 ✅ Unit, Integration, and API tests ✔
