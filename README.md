@@ -49,7 +49,8 @@ This project includes all mandatory testing layers:
 ---
 
 📸 **Test Coverage Summary:**  
-![Test Coverage](./coverage.png)
+![Swagger UI](./DevScreenshots/cover1.png)
+
 
 ---
 🏗️  **Folder Structure**
